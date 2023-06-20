@@ -1,0 +1,75 @@
+﻿trigger:
+  branches:
+    include:
+      - main
+
+parameters:
+  - name: BuildConfiguration
+    displayName: 'Build Configuration'
+    type: string
+    default: 'Prod'
+    values:
+      - 'Dev'
+      - 'Prod'
+
+pool:
+  vmImage: ubuntu-latest
+
+jobs:
+  - job: 'Build'
+    steps:
+    - task: NodeTool@0
+      displayName: 'Install Node.js 18.16.0'
+      inputs:
+        versionSource: 'spec'
+        versionSpec: '18.16.0'
+
+    - task: UseDotNet@2
+      inputs:
+        packageType: 'sdk'
+        version: '8.x'
+        includePreviewVersions: true
+
+    - task: Npm@1
+      inputs:
+        command: 'ci'
+        workingDir: '$(System.DefaultWorkingDirectory)/ClientApp'
+
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'build'
+
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/bin'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+        replaceExistingArchive: true
+      displayName: 'Archive Build Artifacts'
+    
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'YourContainerRegistry'
+        repository: yourcontainerregistry.azurecr.io/ArtStore-${{ Parameters.BuildConfiguration }}
+        command: 'buildAndPush'
+        Dockerfile: 'Dockerfile'
+        buildContext: '$(Build.SourcesDirectory)'
+        tags: |
+          $(Build.BuildId)
+
+  - job: Deploy
+    displayName: 'Deploy to Azure App Service'
+    dependsOn: Build
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: AzureWebApp@1
+      inputs:
+        azureSubscription: 'ADJHL-DEV(62357630-10db-456c-81c4-985bbe4653b1)'
+        appType: 'webAppLinux'
+        appName: 'ArtStore'
+        package: '$(Pipeline.Workspace)/$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+        runtimeStack: 'NODE|18-lts'
+        startUpCommand: 'dotnet artstore.dll'
+      displayName: 'Deploy to Azure App Service'
