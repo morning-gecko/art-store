@@ -230,3 +230,5 @@ _Pvt_Extensions
 # FAKE - F# Make
 .fake/
 
+# https://stackoverflow.com/questions/72962753/should-angular-be-in-gitignore
+*/.angular/cache
