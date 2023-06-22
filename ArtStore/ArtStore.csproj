@@ -19,14 +19,11 @@
     <Content Remove="$(SpaRoot)**" />
     <None Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
-    <None Include=".azure-pipelines\azure-pipelines.yaml" />
-    <None Include=".azure-pipelines\Dockerfile" />
-    <None Include=".azure-pipelines\web-app.bicep" />
+    <None Remove=".azure-pipelines\azure-pipelines.yaml" />
+    <None Remove=".azure-pipelines\Dockerfile" />
+    <None Remove=".azure-pipelines\web-app.bicep" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include=".azure-pipelines\" />
-  </ItemGroup>
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">
