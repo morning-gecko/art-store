@@ -71,5 +71,5 @@ jobs:
         appName: 'ArtStore'
         package: '$(Pipeline.Workspace)/$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
         runtimeStack: 'NODE|18-lts'
-        startUpCommand: 'dotnet artstore.dll'
+        startUpCommand: 'dotnet ArtStore.dll'
       displayName: 'Deploy to Azure App Service'
