@@ -132,5 +132,8 @@
       }
     }
   },
-  "defaultProject": "ArtStore"
+  "defaultProject": "ArtStore",
+  "cli": {
+    "analytics": false
+  }
 }

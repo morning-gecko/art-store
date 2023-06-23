@@ -1,49 +1,24 @@
-﻿# Stage 1: Build Angular Frontend
-FROM node:latest AS build
+﻿# Multi-stage Docker build
+
+# Build Angular Frontend
+FROM node:18 as angular-build
 WORKDIR /app
-
-# Copy package.json and package-lock.json
-COPY package*.json ./
-
-# Install dependencies
-RUN npm install
-
-# Copy the rest of the application code
-COPY . .
-
-# Build the Angular application
+COPY ArtStore/ClientApp/package*.json ./
+RUN npm ci
+COPY ArtStore/ClientApp/ ./
 RUN npm run build --prod
 
-# Stage 2: Serve Angular Frontend with NGINX
-FROM nginx:latest
-
-# Copy the built Angular files to NGINX
-COPY --from=build /app/dist/ /usr/share/nginx/html
-
-# Remove default NGINX configuration
-RUN rm /etc/nginx/conf.d/default.conf
-
-# Copy custom NGINX configuration
-COPY nginx.conf /etc/nginx/conf.d
-
-# Expose port 80
-EXPOSE 80
-
-# Stage 3: Build and Run .NET Core Backend
-FROM mcr.microsoft.com/dotnet/sdk:latest AS backend
+# Build .NET Backend
+FROM mcr.microsoft.com/dotnet/sdk:7.0 as dotnet-build
 WORKDIR /app
-
-# Copy the .NET Core project file(s)
-COPY YourCSharpApp.csproj .
-
-# Restore dependencies
+COPY ArtStore/ ./
 RUN dotnet restore
+RUN dotnet publish --configuration Release --output out --verbosity detailed
 
-# Copy the rest of the application code
-COPY . .
-
-# Build the .NET Core application
-RUN dotnet publish -c Release -o out
-
-# Run the .NET Core application
-CMD ["dotnet", "out/YourCSharpApp.dll"]
+# Final Stage
+FROM mcr.microsoft.com/dotnet/aspnet:7.0
+WORKDIR /app
+COPY --from=dotnet-build /app/out ./
+COPY --from=angular-build /app/dist/ArtStore wwwroot/
+EXPOSE 80
+ENTRYPOINT ["dotnet", "ArtStore.dll"]
