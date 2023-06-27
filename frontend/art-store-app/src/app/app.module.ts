@@ -1,20 +1,27 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DetailsComponent } from './details/details.component';
+
+import { WeatherForecastComponent } from './weather-forecast/weather-forecast.component';
+import { HomeComponent } from './home/home.component';
+import { RouterModule } from '@angular/router';
+import { WeatherService } from './weather.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DetailsComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HomeComponent,
+    RouterModule,
+    WeatherForecastComponent,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [WeatherService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
