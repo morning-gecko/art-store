@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class WeatherService {
-  private url = 'http://localhost:5006/WeatherForecast';
+  private url = 'https://localhost:7280/WeatherForecast';
   
   constructor(private http: HttpClient) { }
   
