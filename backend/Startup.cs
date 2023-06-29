@@ -1,59 +1,61 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using api.Models;
-using Microsoft.Azure.Cosmos;
 using api.Services;
+using Microsoft.Azure.Cosmos;
 
 namespace api
 {
-    public class Startup
+    public static class Startup
     {
-        private IConfiguration Configuration { get; }
-
-        public Startup(IConfiguration configuration)
+        public static WebApplicationBuilder RegisterServices(this WebApplicationBuilder builder)
         {
-            Configuration = configuration;
-        }
+            // ******* Access the configuration *******
+            var config = builder.Configuration;
 
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer();
+            builder.Services.AddAuthentication(
+                JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
 
-            services.AddAuthorization();
+            builder.Services.AddAuthorization();
 
-            services.AddControllers();
-
-            services.AddDbContext<ArtworkContext>(opt =>
-                opt.UseSqlServer(connectionString: Configuration.GetConnectionString("ConnectionString")));
-
-            services.AddEndpointsApiExplorer();
-
-            services.AddSwaggerGen();
-
-            services.AddCors(options =>
+            builder.Services.AddControllers();
+            builder.Services.AddDbContext<ArtworkContext>(opt =>
+                opt.UseSqlServer(config["ConnectionString"]));
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
+            builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowAllOrigins",
                     builder =>
                     {
                         builder.WithOrigins("http://localhost:4200")
-                               .AllowAnyHeader()
-                               .AllowAnyMethod();
+                                .AllowAnyHeader()
+                                .AllowAnyMethod();
                     });
             });
 
+
             // Register Cosmos DB service
-            services.AddSingleton<CosmosClient>(sp =>
+            builder.Services.AddSingleton<CosmosClient>(sp =>
             {
-                var cosmosEndpoint = Configuration["CosmosDB:Endpoint"];
-                var cosmosKey = Configuration["CosmosDB:Key"];
+                var cosmosEndpoint = config["CosmosDB:Endpoint"];
+                var cosmosKey = config["CosmosDB:Key"];
 
                 return new CosmosClient(cosmosEndpoint, cosmosKey);
             });
 
-            services.AddScoped<ICosmosService, CosmosService>();
+            builder.Services.AddScoped<ICosmosService, CosmosService>();
+
+            return builder;
         }
     }
 }
+
