@@ -1,14 +1,14 @@
 parameters:
-- name: environment
+- name: BuildConfiguration
   type: string
-  default: 'development'
+  default: 'Dev'
 - name: iacScriptPath
   type: string
 
 jobs:
 - deployment: Deploy
   displayName: 'Deploy'
-  environment: '${{ parameters.environment }}'
+  environment: '${{ parameters.BuildConfiguration }}'
   strategy:
     runOnce:
       deploy:
