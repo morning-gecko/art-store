@@ -15,14 +15,13 @@ namespace api
             }
 
             app.UseHttpsRedirection();
-            app.UseAuthorization();
-
             app.MapControllers();
             app.UseRouting();
             app.UseCors("AllowAllOrigins");
 
-            app.UseAuthorization();
             app.UseAuthentication();
+            app.UseAuthorization();
+
             app.MapGet("/", () =>
             {
                 return "hello world";
