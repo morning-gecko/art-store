@@ -1,0 +1,48 @@
+parameters:
+- name: BuildConfiguration
+  type: string
+  default: 'Dev'
+
+jobs:
+- job: Build
+  displayName: 'Build'
+  steps:
+  - task: NodeTool@0
+    displayName: 'Install Node.js 18.16.0'
+    inputs:
+      versionSource: 'spec'
+      versionSpec: '18.16.0'
+
+  - task: UseDotNet@2
+    inputs:
+      packageType: 'sdk'
+      version: '8.x'
+      includePreviewVersions: true
+
+  - task: Npm@1
+    inputs:
+      command: 'ci'
+      workingDir: '$(System.DefaultWorkingDirectory)/ClientApp'
+
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'build'
+
+  - task: ArchiveFiles@2
+    inputs:
+      rootFolderOrFile: '$(System.DefaultWorkingDirectory)/bin'
+      includeRootFolder: false
+      archiveType: 'zip'
+      archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+      replaceExistingArchive: true
+    displayName: 'Archive Build Artifacts'
+  
+  - task: Docker@2
+    inputs:
+      containerRegistry: 'YourContainerRegistry'
+      repository: yourcontainerregistry.azurecr.io/ArtStore-${{ Parameters.BuildConfiguration }}
+      command: 'buildAndPush'
+      Dockerfile: 'Dockerfile'
+      buildContext: '$(Build.SourcesDirectory)'
+      tags: |
+        $(Build.BuildId)
