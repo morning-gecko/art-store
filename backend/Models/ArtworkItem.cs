@@ -8,6 +8,8 @@ namespace api.Models
 		public string? Name { get; set; }
 		public bool IsComplete { get; set; }
 		public float Price { get; set; }
+		public string? Artist { get; set; }
+		public DateOnly Date { get; set; }
 	}
 }
 
