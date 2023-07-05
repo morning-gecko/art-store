@@ -36,13 +36,3 @@ jobs:
       archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
       replaceExistingArchive: true
     displayName: 'Archive Build Artifacts'
-  
-  - task: Docker@2
-    inputs:
-      containerRegistry: 'YourContainerRegistry'
-      repository: yourcontainerregistry.azurecr.io/ArtStore-${{ Parameters.BuildConfiguration }}
-      command: 'buildAndPush'
-      Dockerfile: 'Dockerfile'
-      buildContext: '$(Build.SourcesDirectory)'
-      tags: |
-        $(Build.BuildId)
