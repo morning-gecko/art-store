@@ -22,15 +22,21 @@ jobs:
   - task: Npm@1
     inputs:
       command: 'ci'
-      workingDir: '$(System.DefaultWorkingDirectory)/ClientApp'
+      workingDir: '$(System.DefaultWorkingDirectory)/frontend/art-store-app/'
 
   - task: DotNetCoreCLI@2
     inputs:
       command: 'build'
 
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'publish'
+      publishWebProjects: true
+      arguments: '--configuration ${{ parameters.BuildConfiguration }} --output $(Build.ArtifactStagingDirectory)/app'
+
   - task: ArchiveFiles@2
     inputs:
-      rootFolderOrFile: '$(System.DefaultWorkingDirectory)/bin'
+      rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/app'
       includeRootFolder: false
       archiveType: 'zip'
       archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
