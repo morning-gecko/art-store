@@ -53,3 +53,10 @@ jobs:
       archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
       replaceExistingArchive: true
     displayName: 'Archive Build Artifacts'
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Build Artifacts'
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+      ArtifactName: 'drop'
+      publishLocation: 'Container'
