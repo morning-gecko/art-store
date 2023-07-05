@@ -45,15 +45,6 @@ jobs:
       publishWebProjects: true
       arguments: '--configuration ${{ parameters.BuildConfiguration }} --output $(Build.ArtifactStagingDirectory)/app'
 
-  - task: ArchiveFiles@2
-    inputs:
-      rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/app'
-      includeRootFolder: false
-      archiveType: 'zip'
-      archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-      replaceExistingArchive: true
-    displayName: 'Archive Build Artifacts'
-
   - task: copyfiles@2
     inputs:
       SourceFolder: '$(System.DefaultWorkingDirectory)/.azure-pipelines/'
