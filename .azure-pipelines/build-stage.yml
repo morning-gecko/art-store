@@ -24,19 +24,19 @@ jobs:
       command: 'ci'
       workingDir: '$(System.DefaultWorkingDirectory)/frontend/art-store-app/'
 
-  - task: DotNetCoreCLI@2
-    displayName: 'DotNet restore'
-    inputs:
-      command: 'restore'
-      projects: '**/*.csproj'
-      arguments: '--configuration ${{ parameters.BuildConfiguration }}'
+  # - task: DotNetCoreCLI@2
+  #   displayName: 'DotNet restore'
+  #   inputs:
+  #     command: 'restore'
+  #     projects: '**/*.csproj'
+  #     arguments: '--configuration ${{ parameters.BuildConfiguration }}'
 
-  - task: DotNetCoreCLI@2
-    displayName: 'DotNet build'
-    inputs:
-      command: 'build'
-      projects: '**/*.csproj'
-      arguments: '--configuration ${{ parameters.BuildConfiguration }}'
+  # - task: DotNetCoreCLI@2
+  #   displayName: 'DotNet build'
+  #   inputs:
+  #     command: 'build'
+  #     projects: '**/*.csproj'
+  #     arguments: '--configuration ${{ parameters.BuildConfiguration }}'
   
   - task: DotNetCoreCLI@2
     displayName: 'DotNet publish'
@@ -45,12 +45,12 @@ jobs:
       publishWebProjects: true
       arguments: '--configuration ${{ parameters.BuildConfiguration }} --output $(Build.ArtifactStagingDirectory)/app'
 
-  - task: copyfiles@2
+  - task: CopyFiles@2
     inputs:
-      SourceFolder: '$(System.DefaultWorkingDirectory)/.azure-pipelines/'
+      SourceFolder: '$(System.DefaultWorkingDirectory)/.azure-pipelines'
       Contents: |
-        'iac.sh'
-        'web-app.bicep'
+        iac.sh
+        web-app.bicep
       TargetFolder: '$(Build.ArtifactStagingDirectory)/deployment'
 
   - task: PublishBuildArtifacts@1
