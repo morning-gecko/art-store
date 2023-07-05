@@ -25,10 +25,21 @@ jobs:
       workingDir: '$(System.DefaultWorkingDirectory)/frontend/art-store-app/'
 
   - task: DotNetCoreCLI@2
+    displayName: 'DotNet restore'
     inputs:
-      command: 'build'
+      command: 'restore'
+      projects: '**/*.csproj'
+      arguments: '--configuration ${{ parameters.BuildConfiguration }}'
 
   - task: DotNetCoreCLI@2
+    displayName: 'DotNet build'
+    inputs:
+      command: 'build'
+      projects: '**/*.csproj'
+      arguments: '--configuration ${{ parameters.BuildConfiguration }}'
+  
+  - task: DotNetCoreCLI@2
+    displayName: 'DotNet publish'
     inputs:
       command: 'publish'
       publishWebProjects: true
