@@ -54,9 +54,17 @@ jobs:
       replaceExistingArchive: true
     displayName: 'Archive Build Artifacts'
 
-  - task: PublishBuildArtifacts@1
-    displayName: 'Publish Build Artifacts'
+  - task: copyfiles@2
     inputs:
-      PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+      SourceFolder: '$(System.DefaultWorkingDirectory)/.azure-pipelines/'
+      Contents: |
+        'iac.sh'
+        'web-app.bicep'
+      TargetFolder: '$(Build.ArtifactStagingDirectory)/deployment'
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Deployment Artifacts'
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
       ArtifactName: 'drop'
       publishLocation: 'Container'
