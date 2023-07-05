@@ -15,19 +15,13 @@ jobs:
         steps:
         - checkout: none
                   
-        - task: Bash@3
-          displayName: 'Make IaC script executable'
+        - task: AzureCLI@2
+          displayName: 'Azure CLI - IaC'
           inputs:
-            targetType: 'inline'
-            script: |
-              chmod +x ${{ parameters.IacScriptPath }}
-
-        - task: Bash@3
-          displayName: 'Execute IaC script'
-          inputs:
-            targetType: 'inline'
-            script: |
-              . ${{ parameters.IacScriptPath }}
+            azureSubscription: 'ADJHL-DEV(62357630-10db-456c-81c4-985bbe4653b1)'
+            scriptType: 'bash'
+            scriptLocation: 'scriptPath'
+            scriptPath: '${{ parameters.IacScriptPath }}'
           
         # - task: AzureWebApp@1
         #   inputs:
