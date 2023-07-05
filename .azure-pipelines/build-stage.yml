@@ -28,8 +28,8 @@ jobs:
   - task: Npm@1
     displayName: 'npm build'
     inputs:
-      command: 'run'
-      arguments: 'build -- --${{ parameters.BuildConfiguration }}'
+      command: 'custom'
+      customCommand: 'run build --${{ parameters.BuildConfiguration }}'
       workingDir: '$(System.DefaultWorkingDirectory)/frontend/art-store-app/'
 
   - task: CopyFiles@2
