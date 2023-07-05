@@ -20,9 +20,24 @@ jobs:
       includePreviewVersions: true
 
   - task: Npm@1
+    displayName: 'npm clean-install'
     inputs:
       command: 'ci'
       workingDir: '$(System.DefaultWorkingDirectory)/frontend/art-store-app/'
+
+  - task: Npm@1
+    displayName: 'npm build'
+    inputs:
+      command: 'run'
+      arguments: 'build -- --${{ parameters.BuildConfiguration }}'
+      workingDir: '$(System.DefaultWorkingDirectory)/frontend/art-store-app/'
+
+  - task: CopyFiles@2
+    displayName: 'Copy Angular app to artifact staging directory'
+    inputs:
+      SourceFolder: '$(System.DefaultWorkingDirectory)/frontend/art-store-app/dist'
+      Contents: '**'
+      TargetFolder: '$(Build.ArtifactStagingDirectory)/app/wwwroot'
 
   - task: DotNetCoreCLI@2
     displayName: 'DotNet publish'
@@ -30,6 +45,7 @@ jobs:
       command: 'publish'
       publishWebProjects: true
       arguments: '--configuration ${{ parameters.BuildConfiguration }} --output $(Build.ArtifactStagingDirectory)/app'
+      zipAfterPublish: false
 
   - task: CopyFiles@2
     inputs:
