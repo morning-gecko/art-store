@@ -24,7 +24,7 @@ jobs:
               ls -al
 
               echo "List files in artifact"
-              ls -R $(Pipeline.Workspace)/$(Build.ArtifactStagingDirectory)
+              ls -R $(System.DefaultWorkingDirectory)
 
         - script: chmod +x ${{ parameters.iacScriptPath }}
           displayName: 'Make IaC script executable'
