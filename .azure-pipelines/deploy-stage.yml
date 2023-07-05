@@ -2,7 +2,7 @@ parameters:
 - name: BuildConfiguration
   type: string
   default: 'Dev'
-- name: iacScriptPath
+- name: IacScriptPath
   type: string
 
 jobs:
@@ -16,22 +16,19 @@ jobs:
         - checkout: none
                   
         - task: Bash@3
-          displayName: 'List files in artifact'
+          displayName: 'Make IaC script executable'
           inputs:
             targetType: 'inline'
             script: |
-              echo "List files in default location"
-              ls -al $(Agent.BuildDirectory)
+              chmod +x ${{ parameters.IacScriptPath }}
 
-              echo "List files in artifact"
-              ls -r $(System.DefaultWorkingDirectory)
-
-        - script: chmod +x ${{ parameters.iacScriptPath }}
-          displayName: 'Make IaC script executable'
-
-        - script: ./${{ parameters.iacScriptPath }}
+        - task: Bash@3
           displayName: 'Execute IaC script'
-
+          inputs:
+            targetType: 'inline'
+            script: |
+              ./${{ parameters.IacScriptPath }}
+          
         # - task: AzureWebApp@1
         #   inputs:
         #     azureSubscription: 'ADJHL-DEV(62357630-10db-456c-81c4-985bbe4653b1)'

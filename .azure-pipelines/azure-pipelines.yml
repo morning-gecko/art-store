@@ -28,5 +28,5 @@ stages:
   jobs:
     - template: deploy-stage.yml
       parameters:
-        IacScriptPath: 'iac.sh'
+        IacScriptPath: '$(Agent.BuildDirectory)/drop/deployment/iac.sh'
         BuildConfiguration: ${{ parameters.BuildConfiguration }}
