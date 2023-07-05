@@ -21,10 +21,10 @@ jobs:
             targetType: 'inline'
             script: |
               echo "List files in default location"
-              ls -al
+              ls -al $(Agent.BuildDirectory)
 
               echo "List files in artifact"
-              ls -R $(System.DefaultWorkingDirectory)
+              ls -r $(System.DefaultWorkingDirectory)
 
         - script: chmod +x ${{ parameters.iacScriptPath }}
           displayName: 'Make IaC script executable'
