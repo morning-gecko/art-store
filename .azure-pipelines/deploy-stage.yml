@@ -14,16 +14,41 @@ jobs:
       deploy:
         steps:
         - checkout: none
+
+        - task: DownloadBuildArtifacts@0
+          displayName: 'Download Build Artifacts'
+          inputs:
+            buildType: 'specific'
+            project: 'ArtStore'
+            pipeline: 'Build'
+            buildVersionToDownload: 'latest'
+            downloadType: 'single'
+            artifactName: 'drop'
+            downloadPath: '$(Pipeline.Workspace)'
+          
+        - task: Bash@3
+          displayName: 'List files in artifact'
+          inputs:
+            targetType: 'inline'
+            script: |
+              echo "List files in default location"
+              ls -al
+
+              echo "List files in artifact"
+              ls -R $(Pipeline.Workspace)/$(Build.ArtifactStagingDirectory)
+
         - script: chmod +x ${{ parameters.iacScriptPath }}
           displayName: 'Make IaC script executable'
+
         - script: ./${{ parameters.iacScriptPath }}
           displayName: 'Execute IaC script'
-        - task: AzureWebApp@1
-          inputs:
-            azureSubscription: 'ADJHL-DEV(62357630-10db-456c-81c4-985bbe4653b1)'
-            appType: 'webAppLinux'
-            appName: 'ArtStore'
-            package: '$(Pipeline.Workspace)/$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-            runtimeStack: 'NODE|18-lts'
-            startUpCommand: 'dotnet ArtStore.dll'
-          displayName: 'Deploy to Azure App Service'
+
+        # - task: AzureWebApp@1
+        #   inputs:
+        #     azureSubscription: 'ADJHL-DEV(62357630-10db-456c-81c4-985bbe4653b1)'
+        #     appType: 'webAppLinux'
+        #     appName: 'ArtStore'
+        #     package: '$(Pipeline.Workspace)/$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+        #     runtimeStack: 'NODE|18-lts'
+        #     startUpCommand: 'dotnet ArtStore.dll'
+        #   displayName: 'Deploy to Azure App Service'
