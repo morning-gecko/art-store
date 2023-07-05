@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 resourceGroupName="Art-Store-RG"
-cosmosAccountName="Art-Store-Cosmos-Account"
+cosmosAccountName="art-store-cosmos-account"
 databaseName="ArtDatabase"
 containerName="ArtContainer"
 partitionKeyPath="/Id"
