@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-location="centralus"
+location="eastus"
 
 resourceGroupName="rg-art-store"
 
