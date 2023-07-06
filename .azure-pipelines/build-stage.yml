@@ -37,7 +37,7 @@ jobs:
     inputs:
       SourceFolder: '$(System.DefaultWorkingDirectory)/frontend/art-store-app/dist'
       Contents: '**'
-      TargetFolder: '$(Build.ArtifactStagingDirectory)/app/wwwroot'
+      TargetFolder: '$(Build.ArtifactStagingDirectory)/app'
 
   - task: DotNetCoreCLI@2
     displayName: 'DotNet publish'
