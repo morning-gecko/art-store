@@ -31,7 +31,7 @@ jobs:
             WebAppName: 'web-app-art'
             packageForLinux: '$(Agent.BuildDirectory)/drop/app'
             RuntimeStack: 'DOTNETCORE|7.0'
-            StartupCommand: 'dotnet ArtStore.dll'
+            StartupCommand: 'dotnet ./backend/api.dll'
 
         # - task: AzureWebApp@1
         #   inputs:
