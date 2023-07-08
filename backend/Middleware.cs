@@ -8,13 +8,21 @@ namespace api
         public static WebApplication SetupMiddleware(this WebApplication app)
         {
             var config = app.Configuration;
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
             if (app.Environment.IsDevelopment())
             {
-                app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseDeveloperExceptionPage();
             }
-
-            app.UseHttpsRedirection();
+            else
+            {
+                app.UseHttpsRedirection();
+                app.UseExceptionHandler("/Error");
+            }
+            
             app.MapControllers();
             app.UseRouting();
             app.UseCors("AllowAllOrigins");
@@ -25,8 +33,7 @@ namespace api
             app.MapGet("/", () =>
             {
                 return "hello world";
-            }).RequireAuthorization();
-
+            });
             return app;
         }
     }
