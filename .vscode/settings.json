@@ -1,4 +1,4 @@
 {
-    "DockerRun.DisableDockerrc": true,
-    "DockerRun.DisableAutoGenerateConfig": true
+    // "DockerRun.DisableDockerrc": true,
+    // "DockerRun.DisableAutoGenerateConfig": true
 }
