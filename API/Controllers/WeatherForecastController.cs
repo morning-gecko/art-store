@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 namespace API.Controllers;
 
 [ApiController]
+[ApiExplorerSettings(IgnoreApi = true)] // This will hide this controller from Swagger
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase
 {
