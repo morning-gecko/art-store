@@ -20,7 +20,7 @@ namespace API.Extensions
             services.AddSwaggerGen();
             services.AddDbContext<StoreContext>(opt =>
             {
-                opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
+                opt.UseNpgsql(config.GetConnectionString("DefaultConnection"));
             }
             );
 
