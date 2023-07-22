@@ -531,3 +531,4 @@ ehthumbs_vista.db
 *.db-wal
 
 *.png
+out/*
