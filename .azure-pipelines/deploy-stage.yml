@@ -14,7 +14,24 @@ jobs:
       deploy:
         steps:
         - checkout: none
-                  
+        
+        - task: replacetokens@5
+          inputs:
+            rootDirectory: 'rootdir'
+            targetFiles: |
+              ${{ parameters.IacScriptPath }}
+              **/appsettings.Production.json
+            encoding: 'auto'
+            tokenPattern: 'doublebraces'
+            writeBOM: true
+            actionOnMissing: 'warn'
+            keepToken: false
+            actionOnNoFiles: 'continue'
+            enableTransforms: false
+            enableRecursion: false
+            useLegacyPattern: false
+            enableTelemetry: false
+
         - task: AzureCLI@2
           displayName: 'Azure CLI - IaC'
           inputs:
