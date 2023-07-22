@@ -23,21 +23,27 @@ jobs:
     displayName: 'npm clean-install'
     inputs:
       command: 'ci'
-      workingDir: '$(System.DefaultWorkingDirectory)/frontend/art-store-app/'
+      workingDir: '$(System.DefaultWorkingDirectory)/client'
 
   - task: Npm@1
     displayName: 'npm build'
     inputs:
       command: 'custom'
       customCommand: 'run build --${{ parameters.BuildConfiguration }}'
-      workingDir: '$(System.DefaultWorkingDirectory)/frontend/art-store-app/'
+      workingDir: '$(System.DefaultWorkingDirectory)/client'
 
   - task: CopyFiles@2
     displayName: 'Copy Angular app to artifact staging directory'
     inputs:
-      SourceFolder: '$(System.DefaultWorkingDirectory)/frontend/art-store-app/dist'
+      SourceFolder: '$(System.DefaultWorkingDirectory)/client/dist'
       Contents: '**'
       TargetFolder: '$(Build.ArtifactStagingDirectory)/app'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'DotNet restore'
+    inputs:
+      command: 'restore'
+      projects: '**/*.csproj'
 
   - task: DotNetCoreCLI@2
     displayName: 'DotNet publish'
