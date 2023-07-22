@@ -22,7 +22,7 @@ jobs:
             rootDirectory: '$(System.DefaultWorkingDirectory)'
             targetFiles: |
               ${{ parameters.IacScriptPath }}
-              **/appsettings.Production.json
+              $(Agent.BuildDirectory)/drop/app/API/appsettings.Production.json
             encoding: 'auto'
             tokenPattern: 'doublebraces'
             writeBOM: true
