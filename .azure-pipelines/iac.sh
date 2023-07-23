@@ -60,6 +60,12 @@ az webapp config appsettings set \
     --name $appServiceName \
     --settings ASPNETCORE_ENVIRONMENT=Production
 
+az webapp config connection-string set \
+    --resource-group $resourceGroupName \
+    --name $appServiceName \
+    --connection-string-type Custom \
+    --settings DefaultConnection="Server={{PgServerName}}.postgres.database.azure.com;Port=5432;User Id={{ArtDbUser}}@{{PgServerName}};Password={{ArtDbPassword}};Database={{ArtDbName}};Ssl Mode=VerifyFull;"
+
 az postgres server create \
     --name $pgServerName \
     --resource-group $resourceGroupName \
