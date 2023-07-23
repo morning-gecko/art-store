@@ -54,6 +54,11 @@ else
     echo "App Service, '$appServiceName', already exists."
 fi
 
+echo "Setting environment variables for '$appServiceName'..."
+az webapp config appsettings set \
+    --resource-group $resourceGroupName \
+    --name $appServiceName \
+    --settings ASPNETCORE_ENVIRONMENT=Production
 
 az postgres server create \
     --name $pgServerName \
