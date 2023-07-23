@@ -20,6 +20,7 @@ namespace API.Extensions
             services.AddSwaggerGen();
             services.AddDbContext<StoreContext>(opt =>
             {
+                Console.WriteLine(config.GetConnectionString("DefaultConnection"));
                 opt.UseNpgsql(config.GetConnectionString("DefaultConnection"));
             }
             );
