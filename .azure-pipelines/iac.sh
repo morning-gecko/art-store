@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-location="westus2"
+location="westus"
 
 resourceGroupName="rg-art-store"
 
