@@ -11,10 +11,12 @@ using Microsoft.Extensions.Logging;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+Console.WriteLine("Setting up builder services");
 
 builder.Services.AddControllers();
 builder.Services.AddApplicationServices(builder.Configuration);
 
+Console.WriteLine("Invoking build");
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

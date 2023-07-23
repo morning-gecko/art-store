@@ -8,13 +8,32 @@ parameters:
 jobs:
 - deployment: Deploy
   displayName: 'Deploy'
+  variables:
+    - group: 'art-store'
   environment: '${{ parameters.BuildConfiguration }}'
   strategy:
     runOnce:
       deploy:
         steps:
         - checkout: none
-                  
+        
+        - task: replacetokens@5
+          inputs:
+            rootDirectory: '$(System.DefaultWorkingDirectory)'
+            targetFiles: |
+              ${{ parameters.IacScriptPath }}
+              $(Agent.BuildDirectory)/drop/app/API/appsettings.Production.json
+            encoding: 'auto'
+            tokenPattern: 'doublebraces'
+            writeBOM: true
+            actionOnMissing: 'warn'
+            keepToken: false
+            actionOnNoFiles: 'continue'
+            enableTransforms: false
+            enableRecursion: false
+            useLegacyPattern: false
+            enableTelemetry: false
+
         - task: AzureCLI@2
           displayName: 'Azure CLI - IaC'
           inputs:
@@ -31,14 +50,4 @@ jobs:
             WebAppName: 'web-app-art'
             packageForLinux: '$(Agent.BuildDirectory)/drop/app'
             RuntimeStack: 'DOTNETCORE|7.0'
-            StartupCommand: 'dotnet ./backend/api.dll'
-
-        # - task: AzureWebApp@1
-        #   inputs:
-        #     azureSubscription: 'ADJHL-DEV(62357630-10db-456c-81c4-985bbe4653b1)'
-        #     appType: 'webAppLinux'
-        #     appName: 'ArtStore'
-        #     package: '$(Pipeline.Workspace)/$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-        #     runtimeStack: 'NODE|18-lts'
-        #     startUpCommand: 'dotnet ArtStore.dll'
-        #   displayName: 'Deploy to Azure App Service'
+            StartupCommand: 'dotnet ~/site/wwwroot/API/API.dll'

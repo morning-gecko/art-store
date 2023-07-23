@@ -1,60 +1,25 @@
 #!/usr/bin/env bash
 
-location="eastus"
+location="westus"
 
 resourceGroupName="rg-art-store"
-
-# cosmosAccountName="csmo-acct-art"
-# databaseName="csmo-db-art"
-# containerName="csmo-cont-art"
-# partitionKeyPath="/Id"
 
 appServicePlanName="app-plan-art"
 appServiceName="web-app-art"
 
-# az extension add --name cosmosdb-preview
+pgServerName="{{PgServerName}}"
+
+artDbUser="{{ArtDbUser}}"
+artDbPassword="{{ArtDbPassword}}"
+artDbName="{{ArtDbName}}"
+
+idDbUser="{{IdDbUser}}"
+idDbPassword="{{IdDbPassword}}"
+idDbName="{{IdDbName}}"
 
 az group create \
     --name $resourceGroupName \
     --location $location
-
-# az cosmosdb create --name $cosmosAccountName \
-#     --resource-group $resourceGroupName \
-#     --kind GlobalDocumentDB \
-#     --default-consistency-level "Session" \
-#     --enable-free-tier true
-
-# if [[ -z $(az cosmosdb sql database show \
-#         --resource-group $resourceGroupName \
-#         --account-name $cosmosAccountName \
-#         --name $databaseName 2> /dev/null) ]];
-# then
-#     echo "Creating database, '$databaseName'..."
-#     az cosmosdb sql database create \
-#         --account-name $cosmosAccountName \
-#         --resource-group $resourceGroupName \
-#         --name $databaseName
-# else
-#     echo 'Database, '$databaseName', already exists.'
-# fi
-
-# if [[ -z $(az cosmosdb sql container show \
-#         --resource-group $resourceGroupName \
-#         --account-name $cosmosAccountName \
-#         --database-name $databaseName \
-#         --name $containerName 2> /dev/null) ]];
-# then
-#     echo "Creating container, '$containerName'..."
-#     az cosmosdb sql container create \
-#         --account-name $cosmosAccountName \
-#         --database-name $databaseName \
-#         --name $containerName \
-#         --resource-group $resourceGroupName \
-#         --partition-key-path $partitionKeyPath \
-#         --throughput 400
-# else 
-#     echo 'Container, '$containerName', already exists.'
-# fi
 
 if [[ -z $(az appservice plan show \
         --name $appServicePlanName \
@@ -88,3 +53,37 @@ then
 else
     echo "App Service, '$appServiceName', already exists."
 fi
+
+echo "Setting environment variables for '$appServiceName'..."
+az webapp config appsettings set \
+    --resource-group $resourceGroupName \
+    --name $appServiceName \
+    --settings ASPNETCORE_ENVIRONMENT=Production
+
+az webapp config connection-string set \
+    --resource-group $resourceGroupName \
+    --name $appServiceName \
+    --connection-string-type Custom \
+    --settings DefaultConnection="Server={{PgServerName}}.postgres.database.azure.com;Port=5432;User Id={{ArtDbUser}}@{{PgServerName}};Password={{ArtDbPassword}};Database={{ArtDbName}};Ssl Mode=VerifyFull;"
+
+az postgres server create \
+    --name $pgServerName \
+    --resource-group $resourceGroupName \
+    --location $location \
+    --admin-user $artDbUser \
+    --admin-password $artDbPassword \
+    --sku-name B_Gen5_1 \
+    --version 11
+
+az postgres server firewall-rule create \
+    --resource-group $resourceGroupName \
+    --server-name $pgServerName \
+    --name AllowAllAzureIPs \
+    --start-ip-address '0.0.0.0' \
+    --end-ip-address '0.0.0.0'
+
+az postgres db create \
+    --resource-group $resourceGroupName \
+    --server-name $pgServerName \
+    --name $artDbName
+

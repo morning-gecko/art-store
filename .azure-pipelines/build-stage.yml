@@ -58,7 +58,6 @@ jobs:
       SourceFolder: '$(System.DefaultWorkingDirectory)/.azure-pipelines'
       Contents: |
         iac.sh
-        web-app.bicep
       TargetFolder: '$(Build.ArtifactStagingDirectory)/deployment'
 
   - task: PublishBuildArtifacts@1
