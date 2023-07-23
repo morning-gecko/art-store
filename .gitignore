@@ -530,6 +530,4 @@ ehthumbs_vista.db
 *.db-shm
 *.db-wal
 
-*.png
-out/*
-*/art-store.db
+wwwroot/

@@ -1,10 +1,12 @@
 using System;
+using System.IO;
 using API.Extensions;
 using API.Middleware;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
@@ -31,12 +33,19 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "Content")), RequestPath = "/Content"
+});
 
 app.UseCors("CorsPolicy");
 
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapFallbackToController("Index", "Fallback");
 
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
