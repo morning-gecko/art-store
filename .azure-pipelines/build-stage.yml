@@ -32,13 +32,6 @@ jobs:
       customCommand: 'run build --${{ parameters.BuildConfiguration }}'
       workingDir: '$(System.DefaultWorkingDirectory)/client'
 
-  - task: CopyFiles@2
-    displayName: 'Copy Angular app to artifact staging directory'
-    inputs:
-      SourceFolder: '$(System.DefaultWorkingDirectory)/client/dist'
-      Contents: '**'
-      TargetFolder: '$(Build.ArtifactStagingDirectory)/app'
-
   - task: DotNetCoreCLI@2
     displayName: 'DotNet restore'
     inputs:

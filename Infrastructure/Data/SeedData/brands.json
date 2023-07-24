@@ -1,26 +1,26 @@
 [
   {
     "Id": 1,
-    "Name": "Angular"
+    "Name": "Original Content"
   },
   {
     "Id": 2,
-    "Name": "NetCore"
+    "Name": "JimJam Originals"
   },
   {
     "Id": 3,
-    "Name": "VS Code"
+    "Name": "Lil' Jimmy's"
   },
   {
     "Id": 4,
-    "Name": "React"
+    "Name": "Jimmy"
   },
   {
     "Id": 5,
-    "Name": "Typescript"
+    "Name": "OC"
   },
   {
     "Id": 6,
-    "Name": "Redis"
+    "Name": "JimJam"
   }
 ]

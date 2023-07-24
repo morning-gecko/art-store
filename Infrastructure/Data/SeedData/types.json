@@ -1,18 +1,18 @@
 [
   {
     "Id": 1,
-    "Name": "Boards"
+    "Name": "Oil on Canvas"
   },
   {
     "Id": 2,
-    "Name": "Hats"
+    "Name": "Watercolor"
   },
   {
     "Id": 3,
-    "Name": "Boots"
+    "Name": "Pen and Ink"
   },
   {
     "Id": 4,
-    "Name": "Gloves"
+    "Name": "Prints"
   }
 ]
