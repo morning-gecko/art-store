@@ -50,4 +50,4 @@ jobs:
             WebAppName: 'web-app-art'
             packageForLinux: '$(Agent.BuildDirectory)/drop/app'
             RuntimeStack: 'DOTNETCORE|7.0'
-            StartupCommand: 'dotnet ~/site/wwwroot/API/API.dll'
+            StartupCommand: 'cd ~/site/wwwroot/API; dotnet API.dll'
