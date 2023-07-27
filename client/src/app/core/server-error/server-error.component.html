@@ -1,0 +1,9 @@
+<div class="container mt-5" style="color: grey">
+    <h1>Internal Server Error</h1>
+    <ng-container *ngIf="error">
+        <h5 class="mb-5"><em>Error: {{error.message}}</em></h5>
+        <h5>Stack trace</h5>
+        <code class="mt-5 text-danger" style="background-color: whitesmoke; white-space: pre;">{{error.details}}</code>
+    </ng-container>
+    <a routerLink="/home" class="btn btn-primary mt-3 mb-3">Return Home</a>
+</div>
