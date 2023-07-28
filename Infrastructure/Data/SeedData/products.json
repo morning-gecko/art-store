@@ -3,7 +3,7 @@
     "Name": "Sorrow's Silhouette",
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 200,
-    "PictureUrl": "images/products/sb-ang1.png",
+    "PictureUrl": "images/products/canvas-1.png",
     "ProductTypeId": 1,
     "ProductBrandId": 1
   },
@@ -11,7 +11,7 @@
     "Name": "Shadow's Whisper",
     "Description": "Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.",
     "Price": 150,
-    "PictureUrl": "images/products/sb-ang2.png",
+    "PictureUrl": "images/products/canvas-1.png",
     "ProductTypeId": 1,
     "ProductBrandId": 1
   },
@@ -19,7 +19,7 @@
     "Name": "Raven's Solitude",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
     "Price": 180,
-    "PictureUrl": "images/products/sb-core1.png",
+    "PictureUrl": "images/products/canvas-1.png",
     "ProductTypeId": 1,
     "ProductBrandId": 2
   },
@@ -27,7 +27,7 @@
     "Name": "Twilight Mirage",
     "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
     "Price": 300,
-    "PictureUrl": "images/products/sb-core2.png",
+    "PictureUrl": "images/products/canvas-1.png",
     "ProductTypeId": 1,
     "ProductBrandId": 2
   },
@@ -35,7 +35,7 @@
     "Name": "Haunted Elegance",
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 250,
-    "PictureUrl": "images/products/sb-react1.png",
+    "PictureUrl": "images/products/canvas-1.png",
     "ProductTypeId": 1,
     "ProductBrandId": 4
   },
@@ -43,7 +43,7 @@
     "Name": "Shattered Reflection",
     "Description": "Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.",
     "Price": 120,
-    "PictureUrl": "images/products/sb-ts1.png",
+    "PictureUrl": "images/products/canvas-1.png",
     "ProductTypeId": 1,
     "ProductBrandId": 5
   },
@@ -51,7 +51,7 @@
     "Name": "Gothic Sunrise",
     "Description": "Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 10,
-    "PictureUrl": "images/products/hat-core1.png",
+    "PictureUrl": "images/products/digitalart-1.png",
     "ProductTypeId": 2,
     "ProductBrandId": 2
   },
@@ -59,7 +59,7 @@
     "Name": "Obsidian Dream",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
     "Price": 8,
-    "PictureUrl": "images/products/hat-react1.png",
+    "PictureUrl": "images/products/digitalart-1.png",
     "ProductTypeId": 2,
     "ProductBrandId": 4
   },
@@ -67,7 +67,7 @@
     "Name": "Phantom's Waltz",
     "Description": "Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 15,
-    "PictureUrl": "images/products/hat-react2.png",
+    "PictureUrl": "images/products/digitalart-1.png",
     "ProductTypeId": 2,
     "ProductBrandId": 4
   },
@@ -75,7 +75,7 @@
     "Name": "Bleeding Roses",
     "Description": "Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.",
     "Price": 18,
-    "PictureUrl": "images/products/glove-code1.png",
+    "PictureUrl": "images/products/wallart-1.png",
     "ProductTypeId": 4,
     "ProductBrandId": 3
   },
@@ -83,7 +83,7 @@
     "Name": "Eternal Eclipse",
     "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
     "Price": 15,
-    "PictureUrl": "images/products/glove-code2.png",
+    "PictureUrl": "images/products/wallart-1.png",
     "ProductTypeId": 4,
     "ProductBrandId": 3
   },
@@ -91,7 +91,7 @@
     "Name": "Ashen Horizon",
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa.",
     "Price": 16,
-    "PictureUrl": "images/products/glove-react1.png",
+    "PictureUrl": "images/products/wallart-1.png",
     "ProductTypeId": 4,
     "ProductBrandId": 4
   },
@@ -99,7 +99,7 @@
     "Name": "Frozen Echo",
     "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
     "Price": 14,
-    "PictureUrl": "images/products/glove-react2.png",
+    "PictureUrl": "images/products/wallart-1.png",
     "ProductTypeId": 4,
     "ProductBrandId": 4
   },
@@ -107,7 +107,7 @@
     "Name": "Ghostly Symphony",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
     "Price": 250,
-    "PictureUrl": "images/products/boot-redis1.png",
+    "PictureUrl": "images/products/item-1.png",
     "ProductTypeId": 3,
     "ProductBrandId": 6
   },
@@ -115,7 +115,7 @@
     "Name": "Crimson Abyss",
     "Description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
     "Price": 189.99,
-    "PictureUrl": "images/products/boot-core2.png",
+    "PictureUrl": "images/products/item-1.png",
     "ProductTypeId": 3,
     "ProductBrandId": 2
   },
@@ -123,7 +123,7 @@
     "Name": "Spectral Garden",
     "Description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
     "Price": 199.99,
-    "PictureUrl": "images/products/boot-core1.png",
+    "PictureUrl": "images/products/item-1.png",
     "ProductTypeId": 3,
     "ProductBrandId": 2
   },
@@ -131,7 +131,7 @@
     "Name": "Dusk's Sonata",
     "Description": "Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.",
     "Price": 150,
-    "PictureUrl": "images/products/boot-ang2.png",
+    "PictureUrl": "images/products/item-1.png",
     "ProductTypeId": 3,
     "ProductBrandId": 1
   },
@@ -139,7 +139,7 @@
     "Name": "Midnight Mirage",
     "Description": "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
     "Price": 180,
-    "PictureUrl": "images/products/boot-ang1.png",
+    "PictureUrl": "images/products/item-1.png",
     "ProductTypeId": 3,
     "ProductBrandId": 1
   }
