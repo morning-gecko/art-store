@@ -21,7 +21,6 @@ namespace API.Extensions
             Console.WriteLine("Setting up db context");
             services.AddDbContext<StoreContext>(opt =>
             {
-                Console.WriteLine(config.GetConnectionString("DefaultConnection"));
                 opt.UseNpgsql(config.GetConnectionString("DefaultConnection"));
             }
             );
