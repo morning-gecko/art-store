@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-nav-bar',
@@ -8,4 +9,5 @@ import { AppComponent } from 'src/app/app.component';
 })
 export class NavBarComponent {
   @Input() title = '';
+  isProduction = environment.production;
 }
