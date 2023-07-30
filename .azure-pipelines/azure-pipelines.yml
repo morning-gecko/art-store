@@ -3,6 +3,8 @@ trigger:
     include:
       - main
 
+pr: none
+
 parameters:
   - name: BuildConfiguration
     displayName: 'Build Configuration'
