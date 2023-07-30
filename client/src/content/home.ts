@@ -6,7 +6,8 @@ export const homeContent = {
         date: '2023-06-01',
         content: 'The humble frame plays an understated but critical role in presenting artwork. It\'s not just a decorative addition but also a curator, guiding the viewer\'s attention. Choosing the right frame is about harmony - between the artwork, the frame, and the space it resides in. Consider the color palette, the style of the artwork, and the mood you\'re aiming to create. Remember, the best frame enhances, but never competes with the artwork.',
         tags: ['art', 'framing', 'interior design', 'home decor'],
-        image: 'assets/images/frames.jpg'
+        thumbnail: 'assets/images/placeholder.png',
+        thumbnailAlt: 'Clipart "idea" lightbulb with pencil as filament'
     },
     blogPosts: [
         {
@@ -19,7 +20,7 @@ export const homeContent = {
             title: 'Spotlight on Watercolor',
             date: '2023-07-01',
             content: 'Watercolor, with its ethereal quality and luminosity, holds a unique charm. This medium, however, demands a delicate balance of control and surrender. It\'s about layering transparent washes, mastering the water-to-paint ratio, and allowing the unpredictable nature of water to contribute to the final piece. From landscape to portraiture, the versatility of watercolor makes it an exciting choice for many artists.',
-            tags: ['watercolor', 'painting', 'landscape', 'portraiture']
+            tags: ['watercolor', 'painting', 'landscape', 'portraiture'],
         },
         {
             title: 'Art Commissioning: A Collaborative Journey',
