@@ -1,41 +1,40 @@
-<header class="d-flex flex-wrap align-items-center justify-content-center mb-3 px-2 border-bottom">
-  <div class="d-flex align-items-center py-3 px-2">
-    <nav class="navbar navbar-expand-lg navbar-light bg-none">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
-        aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <!-- <a class="navbar-brand" href="#">Navbar</a> -->
-      <a href="/"
-        class="d-flex align-items-center mb-md-0 me-md-auto link-body-emphasis text-secondary-emphasis text-decoration-none">
-        <img src="/assets/images/logo.png" alt="logo" style="max-height: 90px; max-width: 100%;">
-        <span class="fs-5 px-2">{{title}}</span>
-      </a>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-          <li class="nav-item">
-            <a routerLink="/" class="nav-link" routerLinkActive="active"
-              [routerLinkActiveOptions]="{exact:true}">Home<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a routerLink="/shop" class="nav-link" routerLinkActive="active">Shop</a>
-          </li>
-          <li class="nav-item">
-            <a routerLink="/contact" class="nav-link" routerLinkActive="active">Contact</a>
-          </li>
-          <li class="nav-item">
-            <a routerLink="/blog" class="nav-link" routerLinkActive="active">Blog</a>
-          </li>
-          <li class="nav-item" *ngIf="!isProduction">
-            <a routerLink="/test-error" class="nav-link" routerLinkActive="active">Errors</a>
-          </li>
-        </ul>
-        <div class="text-end align-items-center justify-content-center d-flex">
-          <button type="button" class="btn btn-secondary me-2 ms-4">Login</button>
-          <button type="button" class="btn btn-secondary">Sign-up</button>
-          <button class="btn btn-primary btn-xl fa fa-shopping-cart ms-2"></button>
-        </div>
-      </div>
-    </nav>
-  </div>
+<header class="navbar navbar-expand-lg bd-navbar sticky-top border-bottom" style="background-color: white;">
+  <nav class="container-xxl bd-gutter flex-wrap flex-lg-nowrap" aria-label="Main navigation">
+    <button type="button" class="btn btn-secondary me-2" (click)="isCollapsed = !isCollapsed"
+      [attr.aria-expanded]="!isCollapsed" aria-controls="navCommands">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="navCommands" role="button" [collapse]="isCollapsed" [isAnimated]="true">
+      <ul class="navbar-nav flex-row flex-wrap bd-navbar-nav">
+        <li class="nav-item col-6 col-lg-auto">
+          <a routerLink="/" class="nav-link mx-1 py-2 px-1 px-lg-2" routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact:true}">Home<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item col-6 col-lg-auto">
+          <a routerLink="/shop" class="nav-link mx-1 py-2 px-1 px-lg-2" routerLinkActive="active">Shop</a>
+        </li>
+        <li class="nav-item col-6 col-lg-auto">
+          <a routerLink="/contact" class="nav-link mx-1 py-2 px-1 px-lg-2" routerLinkActive="active">Contact</a>
+        </li>
+        <li class="nav-item col-6 col-lg-auto">
+          <a routerLink="/blog" class="nav-link mx-1 py-2 px-1 px-lg-2" routerLinkActive="active">Blog</a>
+        </li>
+        <li class="nav-item col-6 col-lg-auto" *ngIf="!isProduction">
+          <a routerLink="/test-error" class="nav-link mx-1 py-2 px-1 px-lg-2" routerLinkActive="active">Errors</a>
+        </li>
+        <li class="nav-item col-6 col-lg-auto">
+          <button class="btn btn-primary fa fa-shopping-cart mx-1 py-2 px-1 px-lg-2" routerLink="/basket"></button>
+        </li>
+        <li class="nav-item col-6 col-lg-auto">
+          <button type="button" class="btn btn-secondary mx-1 py-2 px-1 px-lg-2">Login</button>
+        </li>
+        <li class="nav-item col-6 col-lg-auto">
+          <button type="button" class="btn btn-secondary mx-1 py-2 px-1 px-lg-2">Sign-up</button>
+        </li>
+      </ul>
+    </div>
+    <a class="navbar-brand p-0 me-0 me-lg-2" href="/" [attr.aria-label]="title">
+      <img src="/assets/images/logo.png" alt="Site logo" style="max-height: 90px;">
+    </a>
+</nav>
 </header>
