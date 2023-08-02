@@ -1,41 +1,43 @@
-<header class="d-flex flex-wrap align-items-center justify-content-center mb-3 px-2 border-bottom">
-  <div class="d-flex align-items-center py-3 px-2">
-    <nav class="navbar navbar-expand-lg navbar-light bg-none">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
-        aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <!-- <a class="navbar-brand" href="#">Navbar</a> -->
-      <a href="/"
-        class="d-flex align-items-center mb-md-0 me-md-auto link-body-emphasis text-secondary-emphasis text-decoration-none">
-        <img src="/assets/images/logo.png" alt="logo" style="max-height: 90px; max-width: 100%;">
-        <span class="fs-5 px-2">{{title}}</span>
-      </a>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-          <li class="nav-item">
-            <a routerLink="/" class="nav-link" routerLinkActive="active"
-              [routerLinkActiveOptions]="{exact:true}">Home<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a routerLink="/shop" class="nav-link" routerLinkActive="active">Shop</a>
-          </li>
-          <li class="nav-item">
-            <a routerLink="/contact" class="nav-link" routerLinkActive="active">Contact</a>
-          </li>
-          <li class="nav-item">
-            <a routerLink="/blog" class="nav-link" routerLinkActive="active">Blog</a>
-          </li>
-          <li class="nav-item" *ngIf="!isProduction">
-            <a routerLink="/test-error" class="nav-link" routerLinkActive="active">Errors</a>
-          </li>
-        </ul>
-        <div class="text-end align-items-center justify-content-center d-flex">
-          <button type="button" class="btn btn-secondary me-2 ms-4">Login</button>
-          <button type="button" class="btn btn-secondary">Sign-up</button>
-          <button class="btn btn-primary btn-xl fa fa-shopping-cart ms-2"></button>
-        </div>
-      </div>
-    </nav>
+<!-- https://www.codeply.com/p/P0KN7DNsEq -->
+<nav class="navbar navbar-expand-md navbar-dark bg-primary mb-2" aria-label="Main navigation">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold" href="/" [attr.aria-label]="title">
+      {{title}}
+    </a>
+    <button class="navbar-toggler ms-auto p-1 border-0" type="button" data-bs-toggle="collapse" data-bs-target="navCommands"
+      (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="navCommands">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse" id="navCommands" role="button" [collapse]="isCollapsed" [isAnimated]="true">
+      <ul class="navbar-nav fs-5 fw-light">
+        <li class="nav-item mx-1 my-1">
+          <a routerLink="/" class="nav-link" routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact:true}">Home<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item mx-1 my-1">
+          <a routerLink="/shop" class="nav-link" routerLinkActive="active">Shop</a>
+        </li>
+        <li class="nav-item mx-1 my-1">
+          <a routerLink="/contact" class="nav-link" routerLinkActive="active">Contact</a>
+        </li>
+        <li class="nav-item mx-1 my-1">
+          <a routerLink="/blog" class="nav-link" routerLinkActive="active">Blog</a>
+        </li>
+        <li class="nav-item mx-1 my-1" *ngIf="!isProduction">
+          <a routerLink="/test-error" class="nav-link" routerLinkActive="active">Errors</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item mx-1 my-1">
+          <button class="btn btn-secondary fa fa-shopping-cart text-dark mt-1" routerLink="/basket"></button>
+        </li>
+        <li class="nav-item mx-1 my-1">
+          <button type="button" class="btn btn-secondary fw-light">Login</button>
+        </li>
+        <li class="nav-item mx-1 my-1">
+          <button type="button" class="btn btn-secondary fw-light">Sign-up</button>
+        </li>
+      </ul>
+    </div>
   </div>
-</header>
+</nav>

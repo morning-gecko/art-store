@@ -10,4 +10,5 @@ import { environment } from 'src/environments/environment';
 export class NavBarComponent {
   @Input() title = '';
   isProduction = environment.production;
+  isCollapsed = true;
 }

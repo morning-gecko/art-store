@@ -9,6 +9,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { SectionHeaderComponent } from './section-header/section-header.component';
 import { BreadcrumbModule } from 'xng-breadcrumb';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 @NgModule({
   declarations: [
@@ -26,12 +27,14 @@ import { NgxSpinnerModule } from 'ngx-spinner';
       preventDuplicates: true
     }),
     BreadcrumbModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    CollapseModule
   ],
   exports: [
     NavBarComponent,
     SectionHeaderComponent,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    CollapseModule
   ]
 })
 export class CoreModule { }
