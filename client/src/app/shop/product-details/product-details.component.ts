@@ -3,6 +3,8 @@ import { Product } from 'src/app/shared/models/product';
 import { ShopService } from '../shop.service';
 import { ActivatedRoute } from '@angular/router';
 import { BreadcrumbService } from 'xng-breadcrumb';
+import { BasketService } from 'src/app/basket/basket.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-product-details',
@@ -11,8 +13,10 @@ import { BreadcrumbService } from 'xng-breadcrumb';
 })
 export class ProductDetailsComponent implements OnInit {
   product?: Product;
+  quantity = 1;
+  quantityInBasket = 0;
 
-  constructor(private shopService: ShopService, private activatedRoute: ActivatedRoute, private bcService: BreadcrumbService) {
+  constructor(private shopService: ShopService, private activatedRoute: ActivatedRoute, private bcService: BreadcrumbService, private basketService: BasketService) {
     this.bcService.set('@productDetails', ' ');
   }
 
@@ -26,14 +30,48 @@ export class ProductDetailsComponent implements OnInit {
       this.shopService.getProduct(+id).subscribe({
         next: product => {
           this.product = product;
-          this.bcService.set('@productDetails', product.name)
+          this.bcService.set('@productDetails', product.name);
+          this.basketService.basketSource$.pipe(take(1)).subscribe({
+            next: basket => {
+              const item = basket?.items.find(i => i.id === +id);
+              if (item) {
+                this.quantity = item.quantity;
+                this.quantityInBasket = item.quantity;
+              }
+            }
+          })
         },
         error: error => console.log(error)
       })
     }
   }
 
-  addItemToBasket() {
-    console.log('Add to basket clicked');
+  incrementQuantity() {
+    this.quantity++;
+  }
+
+  decrementQuantity() {
+    if (this.quantity > 1) {
+      this.quantity--;
+    }
+  }
+
+  updateBasket() {
+    if (this.product) {
+      if (this.quantity > this.quantityInBasket) {
+        const quantityToAdd = this.quantity - this.quantityInBasket;
+        this.quantityInBasket += quantityToAdd;
+        this.basketService.addItemToBasket(this.product, quantityToAdd);
+      }
+      else {
+        const quantityToRemove = this.quantityInBasket - this.quantity;
+        this.quantityInBasket -= quantityToRemove;
+        this.basketService.removeItemFromBasket(this.product.id, quantityToRemove);
+      }
+    }
+  }
+
+  get buttonText() {
+    return this.quantityInBasket === 0 ? 'Add to Cart' : 'Update Cart';
   }
 }
