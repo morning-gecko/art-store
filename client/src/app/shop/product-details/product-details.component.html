@@ -1,19 +1,28 @@
-<div class="row" *ngIf="product">
-    <div class="col-6">
-        <img src="{{product.pictureUrl}}" alt="{{product.name}}" class="w-100 img-fluid">
-    </div>
-    <div class="col-6 mt-5">
-        <h2>{{product.name}}</h2>
-        <h3>{{product.price | currency}}</h3>
-        <div class="d-flex justify-content-start align-items-center">
-            <i class="fa fa-minus-circle me-2"></i>
-            <span class="font-weight-bold fs-3">2</span>
-            <i class="fa fa-plus-circle text-blue ms-2"></i>
-            <button class="btn btn-outline-primary ms-4" (click)="addItemToBasket()">Add to basket</button>
+<div class="container">
+    <div class="row" *ngIf="product">
+        <div class="col-6 mt-5">
+            <img src="{{product.pictureUrl}}" alt="{{product.name}}" class="w-100 img-fluid">
         </div>
-        <div class="row mt-4">
-            <h4>Description</h4>
-            <p>{{product.description}}</p>
+        <div class="col-6 mt-5">
+            <h1 class="fst-italic text-reset">{{product.name}}</h1>
+            <p class="fs-4">{{product.price | currency}}</p>
+            <h5 class="text-success mb-3" *ngIf="quantityInBasket > 0">
+                Quantity in cart: {{quantityInBasket}}
+            </h5>
+            <div class="d-flex justify-content-start align-items-center">
+                <i (click)="decrementQuantity()" class="fa fa-minus-circle me-2"></i>
+                <span class="font-weight-bold fs-3">{{quantity}}</span>
+                <i (click)="incrementQuantity()" class="fa fa-plus-circle ms-2"></i>
+                <button
+                    class="btn btn-outline-primary ms-4"
+                    (click)="updateBasket()"
+                    [disabled]="quantity === quantityInBasket"
+                >{{buttonText}}</button>
+            </div>
+            <div class="row mt-4">
+                <h4>Description</h4>
+                <p>{{product.description}}</p>
+            </div>
         </div>
-    </div>
+    </div>    
 </div>
