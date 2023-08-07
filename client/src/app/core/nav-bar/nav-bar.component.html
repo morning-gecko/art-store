@@ -29,7 +29,11 @@
       </ul>
       <ul class="navbar-nav ms-auto">
         <li class="nav-item mx-1 my-1">
-          <button class="btn btn-secondary fa fa-shopping-cart text-dark mt-1" routerLink="/basket"></button>
+          <button class="btn btn-secondary fa fa-shopping-cart text-dark mt-1" style="max-height: 2rem;" routerLink="/basket">
+            <div class="cart-no" *ngIf="(basketService.basketSource$ | async) as basket">
+              {{getCount(basket.items)}}
+            </div>
+          </button>
         </li>
         <li class="nav-item mx-1 my-1">
           <button type="button" class="btn btn-secondary fw-light">Login</button>

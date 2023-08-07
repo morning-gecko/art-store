@@ -1,13 +1,14 @@
 .cart-no {
-    position: absolute;
-    min-height: 25px;
-    min-width: 25px;
+    position: relative;
+    min-height: 1.05rem;
+    min-width: 1.05rem;
     border-radius: 50%;
     background: #0d6efd;
     color: white;
     text-align: center;
-    top: -12px;
-    right: 32px;
+    top: -22px;
+    right: -12px;
+    padding-top: 1px;
 }
 
 .btn {

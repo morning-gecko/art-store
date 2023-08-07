@@ -19,3 +19,9 @@ export class Basket implements Basket {
     id = cuid2.createId();
     items: BasketItem[] = [];
 }
+
+export interface BasketTotals {
+    shipping: number;
+    subtotal: number;
+    total: number;
+}
