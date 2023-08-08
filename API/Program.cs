@@ -38,14 +38,6 @@ app.UseStaticFiles(new StaticFileOptions
     FileProvider = new PhysicalFileProvider(
         Path.Combine(Directory.GetCurrentDirectory(), "Content")), RequestPath = "/Content"
 });
-Console.WriteLine("File Provider = " + Path.Combine(Directory.GetCurrentDirectory(), "Content"));
-
-var dirs = Directory.EnumerateDirectories(Path.Combine(Directory.GetCurrentDirectory(), "Content"));
-
-foreach (var dir in dirs)
-{
-    Console.WriteLine(dir);
-}
 
 app.UseCors("CorsPolicy");
 
