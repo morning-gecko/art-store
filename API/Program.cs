@@ -17,6 +17,7 @@ Console.WriteLine("Setting up builder services");
 
 builder.Services.AddControllers();
 builder.Services.AddApplicationServices(builder.Configuration);
+builder.Services.AddIdentityServices(builder.Configuration);
 
 Console.WriteLine("Invoking build");
 var app = builder.Build();
