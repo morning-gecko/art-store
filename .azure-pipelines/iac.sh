@@ -13,6 +13,7 @@ artDbUser="{{ArtDbUser}}"
 artDbPassword="{{ArtDbPassword}}"
 artDbName="{{ArtDbName}}"
 
+idServerName="{{IdServerName}}"
 idDbUser="{{IdDbUser}}"
 idDbPassword="{{IdDbPassword}}"
 idDbName="{{IdDbName}}"
@@ -88,7 +89,7 @@ az postgres db create \
     --name $artDbName
 
 az postgres flexible-server create \
-    --name $pgServerName \
+    --name $idServerName \
     --resource-group $resourceGroupName \
     --location $location \
     --admin-user $idDbUser \
