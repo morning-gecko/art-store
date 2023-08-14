@@ -87,3 +87,23 @@ az postgres db create \
     --server-name $pgServerName \
     --name $artDbName
 
+az postgres flexible-server create \
+    --name $pgServerName \
+    --resource-group $resourceGroupName \
+    --location $location \
+    --admin-user $idDbUser \
+    --admin-password $idDbPassword \
+    --sku-name Standard_B1ms \
+    --version 13
+
+az postgres server firewall-rule create \
+    --resource-group $resourceGroupName \
+    --server-name $pgServerName \
+    --name AllowAllAzureIPs \
+    --start-ip-address '0.0.0.0' \
+    --end-ip-address '0.0.0.0'
+
+az postgres db create \
+    --resource-group $resourceGroupName \
+    --server-name $pgServerName \
+    --name $idDbName
