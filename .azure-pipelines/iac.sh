@@ -96,7 +96,8 @@ az postgres flexible-server create \
     --admin-password $idDbPassword \
     --sku-name Standard_B1ms \
     --tier Burstable \
-    --version 13
+    --version 13 \
+    --yes
 
 az postgres server firewall-rule create \
     --resource-group $resourceGroupName \
