@@ -161,7 +161,7 @@ fi
 if [[ -z $(az postgres flexible-server db show \
         --resource-group $resourceGroupName \
         --server-name $idServerName \
-        --name $idDbName \
+        --database-name $idDbName \
         --query "name" \
         --output tsv 2> /dev/null) ]];
 then
