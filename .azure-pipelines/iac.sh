@@ -67,26 +67,58 @@ az webapp config connection-string set \
     --connection-string-type Custom \
     --settings DefaultConnection="Server={{PgServerName}}.postgres.database.azure.com;Port=5432;User Id={{ArtDbUser}}@{{PgServerName}};Password={{ArtDbPassword}};Database={{ArtDbName}};Ssl Mode=VerifyFull;"
 
-az postgres server create \
-    --name $pgServerName \
-    --resource-group $resourceGroupName \
-    --location $location \
-    --admin-user $artDbUser \
-    --admin-password $artDbPassword \
-    --sku-name B_Gen5_1 \
-    --version 11
+if [[ -z $(az postgres server show \
+        --name $pgServerName \
+        --resource-group $resourceGroupName \
+        --query "name" \
+        --output tsv 2> /dev/null) ]];
+then
+    echo "Creating PostgreSQL Server, '$pgServerName'..."
+    az postgres server create \
+        --name $pgServerName \
+        --resource-group $resourceGroupName \
+        --location $location \
+        --admin-user $artDbUser \
+        --admin-password $artDbPassword \
+        --sku-name B_Gen5_1 \
+        --version 11
+else
+    echo "PostgreSQL Server, '$pgServerName', already exists."
+fi
 
-az postgres server firewall-rule create \
-    --resource-group $resourceGroupName \
-    --server-name $pgServerName \
-    --name AllowAllAzureIPs \
-    --start-ip-address '0.0.0.0' \
-    --end-ip-address '0.0.0.0'
+if [[ -z $(az postgres server firewall-rule show \
+        --resource-group $resourceGroupName \
+        --server-name $pgServerName \
+        --name AllowAllAzureIPs \
+        --query "name" \
+        --output tsv 2> /dev/null) ]];
+then
+    echo "Creating firewall rule for PostgreSQL Server, '$pgServerName'..."
+    az postgres server firewall-rule create \
+        --resource-group $resourceGroupName \
+        --server-name $pgServerName \
+        --name AllowAllAzureIPs \
+        --start-ip-address '0.0.0.0' \
+        --end-ip-address '0.0.0.0'
+else
+    echo "Firewall rule, 'AllowAllAzureIPs', for PostgreSQL Server, '$pgServerName', already exists."
+fi
 
-az postgres db create \
-    --resource-group $resourceGroupName \
-    --server-name $pgServerName \
-    --name $artDbName
+if [[ -z $(az postgres db show \
+        --resource-group $resourceGroupName \
+        --server-name $pgServerName \
+        --name $artDbName \
+        --query "name" \
+        --output tsv 2> /dev/null) ]];
+then
+    echo "Creating database, '$artDbName', for PostgreSQL Server, '$pgServerName'..."
+    az postgres db create \
+        --resource-group $resourceGroupName \
+        --server-name $pgServerName \
+        --name $artDbName
+else
+    echo "Database, '$artDbName', already exists."
+fi
 
 if [[ -z $(az postgres flexible-server show \
         --name $idServerName \
@@ -137,7 +169,9 @@ then
     az postgres flexible-server db create \
         --resource-group $resourceGroupName \
         --server-name $idServerName \
-        --database-name $idDbName
+        --database-name $idDbName \
+        --charset UTF8 \
+        --collation en_US.UTF8
 else
     echo "Database, '$idDbName', already exists."
 fi
