@@ -67,6 +67,12 @@ az webapp config connection-string set \
     --connection-string-type Custom \
     --settings DefaultConnection="Server={{PgServerName}}.postgres.database.azure.com;Port=5432;User Id={{ArtDbUser}}@{{PgServerName}};Password={{ArtDbPassword}};Database={{ArtDbName}};Ssl Mode=VerifyFull;"
 
+az webapp config connection-string set \
+    --resource-group $resourceGroupName \
+    --name $appServiceName \
+    --connection-string-type Custom \
+    --settings IdentityConnection="Server={{IdServerName}}.postgres.database.azure.com;Port=5432;User Id={{IdDbUser}}@{{IdServerName}};Password={{IdDbPassword}};Database={{IdDbName}};Ssl Mode=VerifyFull;"
+
 if [[ -z $(az postgres server show \
         --name $pgServerName \
         --resource-group $resourceGroupName \
