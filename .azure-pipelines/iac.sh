@@ -143,8 +143,8 @@ fi
 
 if [[ -z $(az postgres flexible-server firewall-rule show \
         --resource-group $resourceGroupName \
-        --server-name $idServerName \
-        --name AllowAzureServices \
+        --name $idServerName \
+        --rule-name AllowAzureServices \
         --query "name" \
         --output tsv 2> /dev/null) ]];
 then
@@ -161,7 +161,7 @@ fi
 if [[ -z $(az postgres flexible-server db show \
         --resource-group $resourceGroupName \
         --server-name $idServerName \
-        --name $idDbName \
+        --database-name $idDbName \
         --query "name" \
         --output tsv 2> /dev/null) ]];
 then
